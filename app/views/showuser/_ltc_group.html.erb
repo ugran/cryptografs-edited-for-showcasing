@@ -1,0 +1,77 @@
+<div id='ltc-dashboard-showuser' style='padding-left:2.5%; padding-right:2.5%; margin-top:20px;'>
+    <div id='ltc-loaded' style='display:none;'>
+        <div class='row'>
+            <div class="col-sm-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1;'>Total Hashrate</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='total-hashrate'></span> MH/s</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em;'>Total Rewards</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='total-rewards'></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em;'>Paid Rewards</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='paid-rewards'></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em'>Unpaid Rewards</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='unpaid-rewards'></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style='margin-top:20px;'>
+            <div class="col-sm-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em;'>Expected 24h Reward</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='expected-rewards'></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em;'>Past 24h rewards</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='past-rewards'></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em;'>Estimated Electricity Cost</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'>$ <%= @user.fixed_fee %></p>
+                    </div>
+                </div>
+            </div>
+            <% if @group.present? %>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em;'>Current Balance</h4>
+                            <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='cur-ltc'><% if @user.user_balance.present? %><%= @user.user_balance.cur_ltc %><% end %></span></p>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div id='ltc-loading' style='width:100%; text-align:center;'>
+        <%= image_tag 'loader3.gif', style: 'width:200x; height:200px;' %>
+    </div>
+</div>

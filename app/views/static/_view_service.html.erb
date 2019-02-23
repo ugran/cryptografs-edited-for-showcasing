@@ -1,0 +1,131 @@
+<div class="modal fade" id="sendServiceEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="sendServiceEnquiryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sendServiceEnquiryModalLabel"><%= t('send_enquiry') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with( url: services_path, local: true) do |f| %>
+        <%= f.hidden_field :send_service_enquiry, :value => 1 %>
+        <%= f.hidden_field :this_service_header, id: :this_service_header %>
+        <%= f.hidden_field :this_service_options_name, id: :this_service_options_name %>
+        <%= f.hidden_field :this_service_options_list_selected, id: :this_service_options_list_selected %>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <%= f.label t('first_name') %><br />
+              <%= f.text_field :first_name_service, class: "form-control", required: true %>
+            </div>
+            <div class="col-md-6 form-group">
+              <%= f.label t('last_name') %><br />
+              <%= f.text_field :last_name_service, class: "form-control", required: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <%= f.label t('phone_number') %><br />
+              <%= f.text_field :phone_number_service, class: "form-control", required: true %>
+            </div>
+            <div class="col-md-6 form-group">
+              <%= f.label t('email') %><br />
+              <%= f.email_field :email_service, class: "form-control", required: true %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label t('comment') %><br />
+            <%= f.text_area :comment_service, class: "form-control", required: true %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit(t('submit'), class:'btn btn-dark') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container" style="margin-top: 70px;">
+  <div class="row">
+    <div class="col-md-6" style="<% if @this_service.image.present? %>background-image:url('<%= image_url @this_service.image(:medium) %>');<% end %> background-size:contain; background-repeat: no-repeat; background-position: center center; height: 300px;"></div>
+    <div class="col-md-6">
+      <div style='width:100%;'>
+        <h3 style="margin-bottom: 50px;">
+          <% if @this_service.header.present? && @this_service.header_geo.present? %>
+            <% if I18n.locale == :en %>
+              <%= @this_service.header %>
+            <% else %>
+              <%= @this_service.header_geo %>
+            <% end %>
+          <% end %>
+          <i id='fb-share-icon' class="fa fa-facebook-official fa-lg" aria-hidden="true" style='cursor:pointer; float:right;'></i>
+        </h3>
+      </div>
+      <% if ServiceOption.find_by(service_id: @this_service).present? %>
+        <% ServiceOption.where(service_id: @this_service).each do |a| %>
+          <div style="margin-bottom: 20px;">
+            <span id="service_options_name" style="font-weight: bold; font-size: 18px;"><%= a.options["name"] %></span><span style="font-weight: bold;">:</span>
+            <span>
+              <select id="service_options_list" name="service_options_list">
+                <option value=""></option>
+                <% a.options["list_items"].each do |r| %>
+                  <option value="<%= r %>"><%= r %></option>
+                <% end %>
+              </select>
+            </span>
+          </div>
+        <% end %>
+      <% end %>
+      <button id="send_service_enquiry_button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#sendServiceEnquiryModal" style="background: linear-gradient(#8acbed,#529bd7); color: white; cursor: pointer; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; border: 1px solid #8acbed; height: 50px;"><%= t('send_enquiry') %></button>
+    </div>
+  </div>
+  <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 100px;">
+    <li class="nav-item">
+      <a class="nav-link active" id="field_1-tab" data-toggle="tab" href="#field_1" role="tab" aria-controls="field_1" aria-selected="true">Field 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="field_2-tab" data-toggle="tab" href="#field_2" role="tab" aria-controls="field_2" aria-selected="false">Field 2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="field_3-tab" data-toggle="tab" href="#field_3" role="tab" aria-controls="field_3" aria-selected="false">Field 3</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent" style="margin-top: 20px; margin-bottom: 100px;">
+    <% if @this_service.description.present? && @this_service.description_geo.present? %>
+      <div class="tab-pane fade show active" id="field_1" role="tabpanel" aria-labelledby="field_1-tab">
+        <% if I18n.locale == :en %>
+          <%= @this_service.description.html_safe %>
+        <% else %>
+          <%= @this_service.description_geo.html_safe %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @this_service.field_1.present? && @this_service.field_1_geo.present? %>
+      <div class="tab-pane fade" id="field_2" role="tabpanel" aria-labelledby="field_2-tab"><% if I18n.locale == :en %><%= @this_service.field_1.html_safe %><% else %><%= @this_service.field_1_geo.html_safe %><% end %></div>
+    <% end %>
+    <% if @this_service.field_2.present? && @this_service.field_2_geo.present? %>
+      <div class="tab-pane fade" id="field_3" role="tabpanel" aria-labelledby="field_3-tab"><% if I18n.locale == :en %><%= @this_service.field_2.html_safe %><% else %><%= @this_service.field_2_geo.html_safe %><% end %></div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#send_service_enquiry_button').click(function() {
+      var e = document.getElementById("service_options_list");
+      var service_options_list_value = e.options[e.selectedIndex].value;
+      <% if @this_service.header.present? && @this_service.header_geo.present? %>
+        $('#this_service_header').val('<%= @this_service.header %>');
+      <% end %>
+      $('#this_service_options_name').val($('#service_options_name').html());
+      $('#this_service_options_list_selected').val(service_options_list_value);
+    });
+    $('#fb-share-icon').on('click', function(){
+      FB.ui({
+        method: 'share',
+        display: 'popup',
+        href: '<%= request.original_url %>',
+      }, function(response){});
+    });
+  });
+</script>

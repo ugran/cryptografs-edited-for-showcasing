@@ -1,0 +1,120 @@
+@import "bootstrap";
+@import "iziToast";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+@font-face {
+  font-family:'headline_georgian';
+  src:font-url('bpg_mrgvlovani_caps_2010.ttf') format('trueType');
+}
+
+@font-face {
+  font-family:'georgian';
+  src:font-url('bpg_arial_2009.ttf') format('trueType');
+}
+
+HTML, BODY {
+  font-family: 'georgian';
+}
+
+#main {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  min-height:100%;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  min-height: 60px;
+  line-height: 60px;
+  background-color: black;
+  color:white;
+}
+
+#ltc-loading.inactive {
+  display: none;
+}
+
+#btc-loading.inactive {
+  display: none;
+}
+
+.selector-for-some-widget {
+  box-sizing: content-box;
+}
+
+@media print {
+    .container {
+      width: auto;
+    }
+  }
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+}
+
+.home-menu {
+  width:100%;
+  text-align:right;
+  font-size:0.9em;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+}
+
+.home-menu:hover {
+  font-size:1em;
+}
+
+.menu-item-wrapper {
+  height:250px;
+  width:100%;
+  text-align:center;
+  line-height:250px;
+  font-weight:bold;
+  font-size:2em;
+  cursor:pointer;
+  background:rgba(251, 185, 4, 0.8);
+  color:black;
+  text-shadow:none;
+  text-shadow:0px 0px 1px #999999;
+}
+
+.menu-item-wrapper:hover {
+  background:rgba(0, 0, 0, 0.7);
+  color:white;
+  text-shadow:0px 0px 3px #333333;
+}
+
+.btn-outline-light {
+  border-color:#fcc118;
+  color:#fcc118;
+}
+
+.btn-outline-light:hover {
+  background-color: #fcc118;
+  color: black;
+  border-color:#fcc118;
+}
+
+.product:hover {
+  box-shadow: 0px 0px 0px 4px hsla(0,0%,92%,.5);  
+}
+
+
+@media screen and (max-width: 900px) {
+  .home-menu {
+     display:none;
+  }
+}

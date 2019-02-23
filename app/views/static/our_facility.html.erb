@@ -1,0 +1,135 @@
+<div style="background-color: #fcc118; padding-top: 30px; padding-bottom: 30px;">
+  <div class="container" style="text-align: center; border: 5px solid black">
+    <div style="font-weight: bold; margin-top: 30px; margin-bottom: 10px; font-size: 25px; font-family: 'headline_georgian';">Our Data Center</div>
+    <div style="font-family: 'headline_georgian'; font-size: 26px; padding-left: 30px; padding-right: 30px; margin-bottom: 30px;">Cryptografs cryptocurrency mining data centers represent the primary mining effort. Our robust security architecture makes us one of the leading data center solutions providers.</div>
+    <div class="row">
+      <div class="col-md-3" style="height: 250px; border: 1px solid black;">
+        <div style='height:180px;'>
+          <i class="far fa-clock" style="font-size: 96px; margin-top:57px;"></i>
+        </div>
+        <div style="height:70px; font-family: 'headline_georgian'; font-size: 15px; font-weight: bold;">
+          99.95% Uptime SLA
+        </div>
+      </div>
+      <div class="col-md-3" style="height: 250px; border: 1px solid black;">
+        <div style='height:180px;'>
+          <i class="fas fa-thermometer-half" style="font-size: 96px; margin-top:57px;"></i>
+        </div>
+        <div style="height:70px; font-family: 'headline_georgian'; font-size: 15px; font-weight: bold;">
+          Air and immersion<br />
+          cooling technology
+        </div>
+      </div>
+      <div class="col-md-3" style="height: 250px; border: 1px solid black;">
+        <div style='height:180px;'>
+          <i class="material-icons" style="font-size: 96px; margin-top:57px;">lock</i>
+        </div>
+        <div style="height:70px; font-family: 'headline_georgian'; font-size: 15px; font-weight: bold;">
+          Robust Six Zone<br />
+          Layer Protection
+        </div>
+      </div>
+      <div class="col-md-3" style="height: 250px; border: 1px solid black;">
+        <div style='height:180px;'>
+          <i class="material-icons" style="font-size: 96px; margin-top:57px;">developer_board</i>
+        </div>
+        <div style="height:70px; font-family: 'headline_georgian'; font-size: 15px; font-weight: bold;">
+          Cutting-edge<br />
+          Hardware Technology
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3" style="height: 250px; border: 1px solid black;">
+        <div style='height:180px;'>
+          <i class="fas fa-user" style="font-size: 96px; margin-top:57px;"></i>
+        </div>
+        <div style="height:70px; font-family: 'headline_georgian'; font-size: 15px; font-weight: bold;">
+          24/7/365 Technical<br />
+          Assistance
+        </div>
+      </div>
+      <div class="col-md-3" style="height: 250px; border: 1px solid black;">
+        <div style='height:180px;'>
+          <i class="fas fa-tachometer-alt" style="font-size: 96px; margin-top:57px;"></i>
+        </div>
+        <div style="height:70px; font-family: 'headline_georgian'; font-size: 15px; font-weight: bold;">
+          Exceptional performance<br />
+          at competitive price
+        </div>
+      </div>
+      <div class="col-md-3" style="height: 250px; border: 1px solid black;">
+        <div style='height:180px;'>
+          <i class="fas fa-hand-holding-usd" style="font-size: 96px; margin-top:57px;"></i>
+        </div>
+        <div style="height:70px; font-family: 'headline_georgian'; font-size: 15px; font-weight: bold;">
+          Payout on hashrate
+        </div>
+      </div>
+      <div class="col-md-3" style="height: 250px; border: 1px solid black;">
+        <div style='height:180px;'>
+          <i class="fas fa-bolt" style="font-size: 96px; margin-top:57px;"></i>
+        </div>
+        <div style="height:70px; font-family: 'headline_georgian'; font-size: 15px; font-weight: bold;">
+          N+1 power<br />
+          backup system
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style='background-color:black;'>
+    <div id='slick'>
+        <% @facility_carousels.each do |t| %>
+            <% if t.is_video == true && t.youtube_link.present? %>
+              <div style="width: 100%; height: 500px; text-align: center; padding-top: 100px;">
+                <iframe width="560" height="315" src="<%='https://www.youtube.com/embed/'+t.youtube_link.sub('https://youtu.be/', '') %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              </div>
+            <% else %>
+              <div style='width:100%; height:500px; background-position:center center; background-size:contain; background-repeat:no-repeat; background-image:url("<%= image_url t.image(:medium) %>");'></div>
+            <% end %>
+        <% end %>
+    </div>
+    <div clas='row' style='margin-top:30px; padding-bottom:30px;'>
+        <div class='col-md-6 offset-md-3'>
+            <div id='slick-nav'>
+                <% @facility_carousels.each do |t| %>
+                    <% if t.is_video == true && t.youtube_link.present? %>
+                      <div style="width: 100px; height: 100px;">
+                        <div style='position:absolute; z-index:1; width:100px; height:100px;'>
+                        </div>
+                        <div style='position:absolute; z-index:-1; width:100px; height:100px;'>
+                          <iframe width="100" height="100" src="<%='https://www.youtube.com/embed/'+t.youtube_link.sub('https://youtu.be/', '') %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                      </div>
+                    <% else %>
+                      <div style='margin-left:5px; margin-right:5px; width:100px; height:100px; background-position:center center; background-size:contain; background-repeat:no-repeat; background-image:url("<%= image_url t.image(:thumb) %>");"'></div>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#slick').slick({
+            arrows: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            fade: true,
+            centerMode: true,
+            asNavFor: '#slick-nav'
+        });
+        $('#slick-nav').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            asNavFor: '#slick',
+            centerMode: true,
+            focusOnSelect: true,
+            variableWidth: true
+        });
+    });
+</script>

@@ -1,0 +1,26 @@
+<%= render 'admin_nav' %>
+<% if @user_management == 1 %>
+    <%= render 'user_management' %>
+<% elsif @edit_user.present? %>
+    <%= render 'edit_user' %>
+<% elsif @group.present? %>
+    <%= render 'new_group' %>
+<% elsif @model_management.present? %>
+    <%= render 'miner_models' %>
+<% elsif @products.present? %>
+    <%= render 'products_admin' %>
+<% elsif @edit_product.present? %>
+    <%= render 'edit_product' %>
+<% elsif @services.present? %>
+    <%= render 'services_admin' %>
+<% elsif @edit_service.present? %>
+    <%= render 'edit_service' %>
+<% elsif @payout_group.present? %>
+    <%= render 'group_payout_history' %>
+<% elsif @payouts.present? %>
+    <%= render 'payouts' %>
+<% elsif @facility_carousels.present? %>
+    <%= render 'facility_carousels_admin' %>
+<% elsif @balances_group.present? && @balances_users.present? %>
+    <%= render 'show_balances' %>
+<% end %>

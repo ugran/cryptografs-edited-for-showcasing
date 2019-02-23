@@ -1,0 +1,154 @@
+<div class="container" style="margin-bottom: 30px">
+  <p style='margin-top:20px; font-weight:bold'>EDIT SERVICE</p>
+  <%= form_for(@edit_service, url: admin_path, local: true) do |f| %>
+    <%= f.hidden_field :edit_service_submit, :value => @edit_service.id %>
+    <div class="row">
+      <div class="col-md-2 form-group">
+        <%= f.label :number %><br />
+        <%= f.number_field :number, class: "form-control" %>
+      </div>
+      <div class="col-md-5 form-group">
+        <%= f.label :header %><br />
+        <%= f.text_field :header, class: "form-control"%>
+      </div>
+      <div class="col-md-5 form-group">
+        <%= f.label :header_geo %><br />
+        <%= f.text_field :header_geo, class: "form-control"%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <%= f.label :menu_name %><br />
+        <%= f.text_field :dropdown_header, class: "form-control" %>
+      </div>
+      <div class="col-md-6 form-group">
+        <%= f.label :menu_name_geo %><br />
+        <%= f.text_field :dropdown_header_geo, class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <%= f.label :field_1 %><br />
+        <%= f.text_area :description, class: "form-control", id: "edit_ck_service_description" %>
+      </div>
+      <div class="col-md-6 form-group">
+        <%= f.label :field_1_geo %><br />
+        <%= f.text_area :description_geo, class: "form-control", id: "edit_ck_service_description_geo" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <%= f.label :field_2 %><br />
+        <%= f.text_area :field_1, class: "form-control", id: "edit_ck_service_field_1" %>
+      </div>
+      <div class="col-md-6 form-group">
+        <%= f.label :field_2_geo %><br />
+        <%= f.text_area :field_1_geo, class: "form-control", id: "edit_ck_service_field_1_geo" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <%= f.label :field_3 %><br />
+        <%= f.text_area :field_2, class: "form-control", id: "edit_ck_service_field_2" %>
+      </div>
+      <div class="col-md-6 form-group">
+        <%= f.label :field_3_geo %><br />
+        <%= f.text_area :field_2_geo, class: "form-control", id: "edit_ck_service_field_2_geo" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 form-group">
+        <%= f.label :background_color %><br />
+        <%= f.text_field :background_color, class: "form-control" %>
+      </div>
+      <div class="col-md-4 form-group">
+        <%= f.label :text_color %><br />
+        <%= f.text_field :text_color, class: "form-control"%>
+      </div>
+      <div class='col-md-4 form-group'>
+        <%= f.label :image %><br />
+        <%= f.file_field :image, class: 'form-control' %>
+      </div>
+    </div>
+    <%= f.submit('Submit', class:'btn btn-dark') %>
+  <% end %>
+
+  <% if ServiceOption.find_by(service_id: @edit_service.id).present? %>
+    <p style='margin-top:20px; font-weight:bold'>SERVICE OPTIONS</p>
+    <% ServiceOption.where(service_id: @edit_service.id).each do |t| %>
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">List</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= t.options["name"] %></td>
+                <td>
+                  <% t.options["list_items"].each do |a| %>
+                    <%= a %><br />
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <p style='margin-top:20px; font-weight:bold'>ADD SERVICE OPTIONS</p>
+  <div id="add_option" class='btn btn-dark' style="margin-bottom: 20px;" onclick="$('#service_options').toggle();">Add Option</div>
+  <div id="service_options" style="margin-bottom: 20px; display: none;">
+    <input class="option_name" id="option_name" name="option_name" type="text" value="" placeholder="Option Name"><i class="material-icons" style="cursor:pointer; vertical-align: middle;" id="add_option_item">add</i>
+    <div id="service_options_list" style="margin-bottom: 20px;"></div>
+    <%= form_with(url: admin_path, local: true, id: 'add_service_option_form') do |f| %>
+      <%= f.hidden_field :add_service_options, id: 'add_service_options' %>
+      <%= f.hidden_field :edit_service_id, value: @edit_service.id %>
+      <div id="submit_option" class='btn btn-dark' style="margin-bottom: 20px;">Submit Option</div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('#add_option_item').on('click', function() {
+      $('#service_options_list').append('<div style="display:block;"><input class="list_item" name="list_item" type="text" value="" placeholder="List Item"><i class="material-icons" onclick="$(this).parent().remove();" style="cursor:pointer">delete</i></div>');
+    });
+
+    service_options_json = {}
+    $('#submit_option').on('click', function() {
+      service_options_json.name = $('#option_name').val();
+      list_items = [];
+      $('#service_options_list').find('.list_item').each(function(e,a) {
+        list_items.push($(a).val());
+      });
+      service_options_json.list_items = list_items;
+      $('#add_service_options').val(JSON.stringify(service_options_json));
+      $('#add_service_option_form').submit();
+    });
+
+    ClassicEditor.create( document.querySelector('#edit_ck_service_description' )).catch( error => {
+      console.error( error );
+    });
+    ClassicEditor.create( document.querySelector('#edit_ck_service_description_geo' )).catch( error => {
+      console.error( error );
+    });
+    ClassicEditor.create( document.querySelector('#edit_ck_service_field_1' )).catch( error => {
+      console.error( error );
+    });
+    ClassicEditor.create( document.querySelector('#edit_ck_service_field_1_geo' )).catch( error => {
+      console.error( error );
+    });
+    ClassicEditor.create( document.querySelector('#edit_ck_service_field_2' )).catch( error => {
+      console.error( error );
+    });
+    ClassicEditor.create( document.querySelector('#edit_ck_service_field_2_geo' )).catch( error => {
+      console.error( error );
+    });
+  });
+</script>

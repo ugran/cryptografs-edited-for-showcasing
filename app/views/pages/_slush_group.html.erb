@@ -1,0 +1,61 @@
+<div id='btc-dashboard' style='padding-left:2.5%; padding-right:2.5%; margin-top:20px;'>
+    <div id='btc-loaded' style='display:none;'>
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1.5em;'>Total Hashrate</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='btc-total-hashrate'></span> TH/s</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1.5em;'>Confirmed Reward</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='btc-confirmed-reward'></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1.5em;'>Unconfirmed Reward</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='btc-unconfirmed-reward'></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='row' style='margin-top:20px;'>
+            <div class="col-sm-6 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1.5em;'>Estimated Reward</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='btc-estimated-reward'></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em;'>Estimated Electricity Cost</h4>
+                        <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'>$ <%= current_user.fixed_fee %></p>
+                    </div>
+                </div>
+            </div>
+            <% if @group.present? %>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" style='width:100%; text-align:center; font-weight:bold; font-size:1em;'>Current Balance</h4>
+                            <p class="card-text" style='width:100%; text-align:center; font-weight:bold; font-size:2em;'><span id='cur-btc'><% if current_user.user_balance.present? %><%= current_user.user_balance.cur_btc %><% end %></span></p>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div id='btc-loading' style='width:100%; text-align:center;'>
+        <%= image_tag 'loader3.gif', style: 'width:200x; height:200px;' %>
+    </div>
+</div>

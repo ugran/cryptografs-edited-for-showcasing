@@ -1,0 +1,5 @@
+<% if current_user.nicehash? %>
+    <%= render 'nicehash_dashboard' %>
+<% else %>
+    <%= render 'custompools_dashboard' %>
+<% end %>
